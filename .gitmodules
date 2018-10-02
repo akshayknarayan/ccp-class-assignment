@@ -4,3 +4,6 @@
 [submodule "generic-cong-avoid"]
 	path = generic-cong-avoid
 	url = https://github.com/ccp-project/generic-cong-avoid
+[submodule "mahimahi"]
+	path = mahimahi
+	url = git@github.com:akshayknarayan/mahimahi
