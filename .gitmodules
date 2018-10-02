@@ -1,0 +1,6 @@
+[submodule "ccp-kernel"]
+	path = ccp-kernel
+	url = https://github.com/ccp-project/ccp-kernel
+[submodule "generic-cong-avoid"]
+	path = generic-cong-avoid
+	url = https://github.com/ccp-project/generic-cong-avoid
