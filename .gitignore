@@ -1,0 +1,5 @@
+.vagrant
+ubuntu*log
+*.mahi
+results
+*/*pycache*
