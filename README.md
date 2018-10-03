@@ -13,18 +13,15 @@ She needs a congestion control developer to create an algorithm she can use for 
 Because her transfer is so large, Alyssa wants to give it priority in her network. Unfortunately, Alyssa has a firewall configuration which only allows her to open one connection. 
 She asks you to develop a congestion control algorithm which can compete fairly with not one, but multiple existing flows, across a variety of Internet conditions, including variable RTT, link bandwidths, and queue lengths.
 
-Contest
--------
-
-We will host a [leaderboard](http://6829fa18.csail.mit.edu) of the submissions, so you can see how well your fellow congestion control developers are doing as well as test using our link conditions. To submit to the leaderboard, commit your work and run `make submit`.
-
 Submission Instructions
 -----------------------
 
 Submit a link to a *private* github.mit.edu repository. Your repository must be cloned from this starter repository. Ensure that the usernames "akshayn" and "vikramn" are added as collaborators to your repository. 
 We will only consider commits made before the submission deadline. If you would like to use an extension day, include the string "EXTENSION-DAY" in *all* commit messages for commits made after the deadline AND contact the staff individually once you are done committing. You must submit the form (which tells us where your repository is) as soon as possible.
 
-In addition, this lab includes a contest. To manage contest submissions, we will use git tags. Use the tag "contest-submssion" to tag a commit which we should use to add your submission to the leaderboard.
+##Contest
+
+We will host a [leaderboard](http://6829fa18.csail.mit.edu) of the submissions, so you can see how well your fellow congestion control developers are doing as well as test using our link conditions. To submit to the leaderboard, commit your work and run `make submit`.
 
 CCP
 ---
