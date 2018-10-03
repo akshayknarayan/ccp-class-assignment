@@ -51,3 +51,10 @@ results:
 
 run: build results
 	python3 scripts/exp.py
+
+#########
+# Contest
+#########
+
+submit:
+	python3 scripts/submit.py
