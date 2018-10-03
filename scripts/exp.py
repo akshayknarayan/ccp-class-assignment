@@ -65,6 +65,7 @@ def setup_ccp(alg_binary, alg_args, outdir, prefix):
     )
 
 def run_alg_experiment(algname, alg_binary, alg_args, rtt, bw, dur, num_flows, outdir, num_iters):
+    algname = algname.replace('-', '') # remove dashes to keep the logfile names parseable
     kill_processes(alg_binary.split('/')[-1])
 
     for it in range(num_iters):
