@@ -84,3 +84,6 @@ def run_algs():
     to_run = algs.algs()
     for name, alg in to_run:
         run_alg_experiment(name, alg['binary'], alg['args'], 20, 96, 30, 5, 'results', 1)
+
+if __name__ == '__main__':
+    run_algs()

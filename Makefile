@@ -36,6 +36,10 @@ mahimahi: mahimahi/src/frontend/mm-delay
 cubic: ./generic-cong-avoid/target/debug/cubic
 reno: ./generic-cong-avoid/target/debug/reno 
 
+# TODO
+# if necessary, add a target to build your binary here
+# and add your target to the build target below
+
 build: ccp-kernel/ccp.ko mahimahi/src/frontend/mm-delay ./generic-cong-avoid/target/debug/reno
 
 ##################
