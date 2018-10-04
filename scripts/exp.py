@@ -5,8 +5,41 @@ import threading
 import sys
 import os.path
 import subprocess as sh
+import argparse
 
 import algs
+
+parser = argparse.ArgumentParser('PS2')
+parser.add_argument('--capacity',
+        type=int,
+        required=True,
+        help='Capacity of the bottleneck link shared by the flow, in Mbps')
+parser.add_argument('--rtt',
+        type=int,
+        required=True,
+        help='Minimum roundtrip delay, in ms')
+parser.add_argument('--buffer',
+        type=int,
+        required=True,
+        help='Number of packets (MTU=1500B) in the droptail queue')
+parser.add_argument('--duration',
+        type=int,
+        required=True,
+        help='Time to run the experiment for, in seconds')
+parser.add_argument('--k',
+        type=int,
+        required=True,
+        help='Number of Reno flows the CCP flows should emulate')
+parser.add_argument('--out',
+        type=str,
+        default='results',
+        help='Directory in which to output results')
+parser.add_argument('--iters',
+        type=int,
+        default=1,
+        help='Number of times to run the experiment')
+args = parser.parse_args()
+
 
 def write_mahimahi_trace(mbps):
     num_lines = int(mbps/12)
@@ -67,15 +100,16 @@ def setup_ccp(alg_binary, alg_args, outdir, prefix):
 def run_alg_experiment(algname, alg_binary, alg_args, rtt, bw, dur, num_flows, outdir, num_iters):
     algname = algname.replace('-', '') # remove dashes to keep the logfile names parseable
     kill_processes(alg_binary.split('/')[-1])
-
+    
     for it in range(num_iters):
-        prefix = "{}-{}mbps-{}ms-{}s-{}flows-{}".format(algname, bw, rtt, dur, num_flows, it)
+        prefix = "{}-{}mbps-{}ms-{}s-{}flows-{}".format(algname, args.capacity, args.rtt,
+                args.duration, args.k, it)
         setup_ccp(alg_binary, alg_args, outdir, prefix)
 
         print("Starting {}".format(prefix))
 
         spawn_server(outdir, prefix)
-        spawn_flows(rtt, bw, dur, num_flows, 'reno', outdir, prefix).wait()
+        spawn_flows(args.rtt, args.capacity, args.duration, args.k, 'reno', outdir, prefix).wait()
 
         time.sleep(5)
         kill_processes(alg_binary.split('/')[-1])
@@ -84,7 +118,7 @@ def run_algs():
     to_run = algs.algs()
     for name in to_run:
         alg = to_run[name]
-        run_alg_experiment(name, alg['binary'], alg['args'], 20, 96, 30, 5, 'results', 1)
+        run_alg_experiment(name, alg['binary'], alg['args'], args.out, args.iters)
 
 if __name__ == '__main__':
     run_algs()
