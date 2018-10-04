@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
 import time
-import threading
 import sys
 import os.path
 import subprocess as sh
 import argparse
+import math
 
 import algs
 
@@ -42,11 +42,14 @@ args = parser.parse_args()
 
 
 def write_mahimahi_trace(mbps):
-    num_lines = int(mbps/12)
     fn = "bw{}.mahi".format(mbps)
+    start = 0.
     with open(fn, 'w') as f:
-        for _ in range(num_lines):
-            f.write("1\n")
+        for _ in range(mbps-1):
+            start += 12./mbps 
+            f.write("%d\n" % math.ceil(start))
+        # To deal with rounding errors
+        f.write("12\n")
     return fn
 
 def shut_up(cmd):
