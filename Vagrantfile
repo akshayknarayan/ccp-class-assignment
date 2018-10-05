@@ -14,7 +14,7 @@ chmod u+x ./rust.install.sh
 chown vagrant:vagrant ./rust.install.sh
 su -c "./rust.install.sh -y -v --default-toolchain nightly" vagrant
 # mahimahi setup
-sudo sysctl -w net.ipv4.ip_forward=1
+echo "sudo sysctl -w net.ipv4.ip_forward=1" >> ~/.bashrc
 SCRIPT
 
 Vagrant.configure("2") do |config|

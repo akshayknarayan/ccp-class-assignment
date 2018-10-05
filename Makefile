@@ -33,10 +33,13 @@ mahimahi: mahimahi/src/frontend/mm-delay
 ./generic-cong-avoid/target/debug/reno ./generic-cong-avoid/target/debug/cubic:
 	cd generic-cong-avoid && cargo build
 
+python_bindings:
+	cd portus/python && sudo python3 setup.py install
+
 cubic: ./generic-cong-avoid/target/debug/cubic
 reno: ./generic-cong-avoid/target/debug/reno 
 
-build: ccp-kernel/ccp.ko mahimahi/src/frontend/mm-delay ./generic-cong-avoid/target/debug/reno
+build: ccp-kernel/ccp.ko mahimahi/src/frontend/mm-delay ./generic-cong-avoid/target/debug/reno python_bindings
 	$(MAKE) -C your_code
 
 #########
