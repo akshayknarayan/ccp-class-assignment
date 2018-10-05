@@ -6,7 +6,6 @@ import os.path
 import subprocess as sh
 import math
 
-import algs
 
 def write_mahimahi_trace(mbps):
     fn = "bw{}.mahi".format(mbps)
@@ -85,9 +84,8 @@ def run_alg_experiment(algname, alg_binary, alg_args, bw, rtt, dur, k, buf, outd
         time.sleep(5)
         kill_processes(alg_binary.split('/')[-1])
 
-def run_algs(bw, rtt, dur, k, buf, outdir, iters):
-    to_run = algs.algs()
-    for name in to_run:
-        alg = to_run[name]
+def run_algs(algs, bw, rtt, dur, k, buf, outdir, iters):
+    for name in algs:
+        alg = algs[name]
         run_alg_experiment(name, alg['binary'], alg['args'], bw, rtt, dur, k, buf, outdir, iters)
 

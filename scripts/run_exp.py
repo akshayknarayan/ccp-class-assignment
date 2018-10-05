@@ -2,6 +2,7 @@
 
 import argparse
 import exp
+import algs
 
 parser = argparse.ArgumentParser('PS2')
 parser.add_argument('--capacity',
@@ -35,5 +36,5 @@ parser.add_argument('--iters',
 args = parser.parse_args()
 
 
-exp.run_algs(args.capacity, args.rtt, args.duration, args.k, args.buffer, args.out, args.iters)
+exp.run_algs(algs.algs(), args.capacity, args.rtt, args.duration, args.k, args.buffer, args.out, args.iters)
 
