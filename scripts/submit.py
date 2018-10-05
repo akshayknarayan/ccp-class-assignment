@@ -57,20 +57,21 @@ def upload():
             continue
         break
 
+    name = ''
+    with open('NAME.txt', 'r') as f:
+        name = f.read()
+
     try:
         requests.post(url,
             data = {
                 'repository': r,
+                'team': name,
             },
             timeout=5,
         )
     except:
         print("Could not contact contest server.")
         return
-
-    name = ''
-    with open('NAME.txt', 'r') as f:
-        name = f.read()
 
     print("Check your results at http://6829fa18.csail.mit.edu:8080/{}.html".format(name))
     print("Check the leaderboard at http://6829fa18.csail.mit.edu:8080/leaderboard.html")

@@ -12,7 +12,7 @@ def write_mahimahi_trace(mbps):
     start = 0.
     with open(fn, 'w') as f:
         for _ in range(mbps-1):
-            start += 12./mbps 
+            start += 12./mbps
             f.write("%d\n" % math.ceil(start))
         # To deal with rounding errors
         f.write("12\n")
@@ -70,7 +70,7 @@ def setup_ccp(alg_binary, alg_args, outdir, prefix):
 def run_alg_experiment(algname, alg_binary, alg_args, bw, rtt, dur, k, buf, outdir, num_iters):
     algname = algname.replace('-', '') # remove dashes to keep the logfile names parseable
     kill_processes(alg_binary.split('/')[-1])
-    
+
     for it in range(num_iters):
         prefix = "{}-{}mbps-{}ms-{}s-{}flows-{}pkts-{}".format(algname, bw, rtt,
                 dur, k, buf, it)
@@ -87,5 +87,6 @@ def run_alg_experiment(algname, alg_binary, alg_args, bw, rtt, dur, k, buf, outd
 def run_algs(algs, bw, rtt, dur, k, buf, outdir, iters):
     for name in algs:
         alg = algs[name]
+        alg['args'] += " --num-connections={}".format(k)
         run_alg_experiment(name, alg['binary'], alg['args'], bw, rtt, dur, k, buf, outdir, iters)
 
