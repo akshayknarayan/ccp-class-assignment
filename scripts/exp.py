@@ -4,42 +4,9 @@ import time
 import sys
 import os.path
 import subprocess as sh
-import argparse
 import math
 
 import algs
-
-parser = argparse.ArgumentParser('PS2')
-parser.add_argument('--capacity',
-        type=int,
-        required=True,
-        help='Capacity of the bottleneck link shared by the flow, in Mbps')
-parser.add_argument('--rtt',
-        type=int,
-        required=True,
-        help='Minimum roundtrip delay, in ms')
-parser.add_argument('--buffer',
-        type=int,
-        required=True,
-        help='Number of packets (MTU=1500B) in the droptail queue')
-parser.add_argument('--duration',
-        type=int,
-        required=True,
-        help='Time to run the experiment for, in seconds')
-parser.add_argument('--k',
-        type=int,
-        required=True,
-        help='Number of Reno flows the CCP flows should emulate')
-parser.add_argument('--out',
-        type=str,
-        default='results',
-        help='Directory in which to output results')
-parser.add_argument('--iters',
-        type=int,
-        default=1,
-        help='Number of times to run the experiment')
-args = parser.parse_args()
-
 
 def write_mahimahi_trace(mbps):
     fn = "bw{}.mahi".format(mbps)
@@ -63,7 +30,7 @@ def kill_processes(bin_name):
 def spawn_server(outdir, prefix):
     sh.Popen("iperf -s -p 4242 > {}".format(os.path.join(outdir, "{}-server.log".format(prefix))), shell=True)
 
-def spawn_flows(rtt, bw, dur, numflows, alg, outdir, prefix):
+def spawn_flows(rtt, bw, dur, numflows, bufsize, alg, outdir, prefix):
     delay = int(rtt / 2) # mm-delay adds the delay in both directions
 
     # mahimahi trace file
@@ -75,7 +42,7 @@ def spawn_flows(rtt, bw, dur, numflows, alg, outdir, prefix):
         ./scripts/start_flows.sh {} {} {} {} {}"
 
     mahimahi_command = mahimahi_command.format(delay, mahimahi_file, mahimahi_file,
-        args.buffer,
+        bufsize,
         dur,
         numflows,
         alg,
@@ -101,28 +68,26 @@ def setup_ccp(alg_binary, alg_args, outdir, prefix):
         shell=True
     )
 
-def run_alg_experiment(algname, alg_binary, alg_args, outdir, num_iters):
+def run_alg_experiment(algname, alg_binary, alg_args, bw, rtt, dur, k, buf, outdir, num_iters):
     algname = algname.replace('-', '') # remove dashes to keep the logfile names parseable
     kill_processes(alg_binary.split('/')[-1])
     
     for it in range(num_iters):
-        prefix = "{}-{}mbps-{}ms-{}s-{}flows-{}".format(algname, args.capacity, args.rtt,
-                args.duration, args.k, it)
+        prefix = "{}-{}mbps-{}ms-{}s-{}flows-{}pkts-{}".format(algname, bw, rtt,
+                dur, k, buf, it)
         setup_ccp(alg_binary, alg_args, outdir, prefix)
 
         print("Starting {}".format(prefix))
 
         spawn_server(outdir, prefix)
-        spawn_flows(args.rtt, args.capacity, args.duration, args.k, 'reno', outdir, prefix).wait()
+        spawn_flows(rtt, bw, dur, k, buf, 'reno', outdir, prefix).wait()
 
         time.sleep(5)
         kill_processes(alg_binary.split('/')[-1])
 
-def run_algs():
+def run_algs(bw, rtt, dur, k, buf, outdir, iters):
     to_run = algs.algs()
     for name in to_run:
         alg = to_run[name]
-        run_alg_experiment(name, alg['binary'], alg['args'], args.out, args.iters)
+        run_alg_experiment(name, alg['binary'], alg['args'], bw, rtt, dur, k, buf, outdir, iters)
 
-if __name__ == '__main__':
-    run_algs()
