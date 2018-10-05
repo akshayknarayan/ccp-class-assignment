@@ -3,3 +3,4 @@ ubuntu*log
 *.mahi
 results
 */*pycache*
+*.pyc
