@@ -1,0 +1,9 @@
+[package]
+name = "your_code"
+version = "0.0.1"
+authors = ["TODO"]
+edition = "2018"
+
+[dependencies]
+generic_cong_avoid = { path = "../generic-cong-avoid" }
+slog = {version = "2"}

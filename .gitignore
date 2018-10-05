@@ -4,3 +4,4 @@ ubuntu*log
 results
 */*pycache*
 *.pyc
+*.rustfmt
