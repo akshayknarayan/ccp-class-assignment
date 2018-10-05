@@ -7,3 +7,6 @@
 [submodule "mahimahi"]
 	path = mahimahi
 	url = https://github.com/akshayknarayan/mahimahi
+[submodule "portus"]
+	path = portus
+	url = https://github.com/ccp-project/portus
