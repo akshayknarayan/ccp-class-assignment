@@ -21,6 +21,7 @@ Setup
 As you have become familiar with network emulation from Lab 1, we do not require you to do this again for Lab 2. We provide a Vagrantfile which you can use to configure and run a virtual machine you can use for development and testing for your congestion control algorithm. 
 To set up your environment, first clone this repository. Make sure you have also cloned the git submodules: `git submodule update --init --recursive`. 
 Then, install [Vagrant](https://www.vagrantup.com/) and [Virtualbox](https://www.virtualbox.org/) and run `vagrant up`.
+The [vagrant-faster plugin](https://github.com/rdsubhas/vagrant-faster) may be useful for you.
 You can now access the virtual machine with `vagrant ssh`. This repository is mounted at `/ccp`, so to get the baseline results, you can do `cd /ccp` followed by `make build`. Then, `python3 scripts/run_exp.py` will run experiments for the algorithms specified in `scripts/algs.py`.
 
 Contest
