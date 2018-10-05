@@ -46,11 +46,8 @@ build: ccp-kernel/ccp.ko mahimahi/src/frontend/mm-delay ./generic-cong-avoid/tar
 # run experiments 
 ##################
 
-results:
-	mkdir -p results
-
-run: build results
-	python3 scripts/exp.py
+run:
+	$(MAKE) -C your_code
 
 #########
 # Contest

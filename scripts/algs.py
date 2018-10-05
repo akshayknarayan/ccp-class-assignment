@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# The names of the binary should be with reference to the main repo directory (..)
 def algs():
     return {
         'reno': {

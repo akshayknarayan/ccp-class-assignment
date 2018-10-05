@@ -100,7 +100,7 @@ def setup_ccp(alg_binary, alg_args, outdir, prefix):
         shell=True
     )
 
-def run_alg_experiment(algname, alg_binary, alg_args, rtt, bw, dur, num_flows, outdir, num_iters):
+def run_alg_experiment(algname, alg_binary, alg_args, outdir, num_iters):
     algname = algname.replace('-', '') # remove dashes to keep the logfile names parseable
     kill_processes(alg_binary.split('/')[-1])
     
