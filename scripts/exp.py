@@ -37,7 +37,7 @@ def spawn_flows(rtt, bw, dur, numflows, bufsize, alg, outdir, prefix):
 
     # run mahimahi, set fq on the interface & run the client file
     mahimahi_command = "mm-delay {} \
-        mm-link {} {} --downlink-queue=droptail --downlink-queue-args=\'packets={}\' \
+        mm-link {} {} --uplink-queue=droptail --uplink-queue-args=\'packets={}\' \
         ./scripts/start_flows.sh {} {} {} {} {}"
 
     mahimahi_command = mahimahi_command.format(delay, mahimahi_file, mahimahi_file,
