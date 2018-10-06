@@ -45,7 +45,7 @@ def get_remote():
         return input("Git remote url: ")
 
 def upload():
-    url = "http://6829fa18.csail.mit.edu:8080/register"
+    url = "http://6829fa18.csail.mit.edu/register"
     r = ''
     while True:
         r = get_remote()
@@ -73,8 +73,8 @@ def upload():
         print("Could not contact contest server.")
         return
 
-    print("Check your results at http://6829fa18.csail.mit.edu:8080/{}.html".format(name))
-    print("Check the leaderboard at http://6829fa18.csail.mit.edu:8080/leaderboard.html")
+    print("Check your results at http://6829fa18.csail.mit.edu/{}.html".format(name))
+    print("Check the leaderboard at http://6829fa18.csail.mit.edu/leaderboard.html")
 
 s = check_required_files()
 if not s:
