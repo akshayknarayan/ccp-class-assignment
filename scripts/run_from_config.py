@@ -5,7 +5,7 @@ import algs
 
 def choose_alg(ccalgs):
     for a in ccalgs:
-        if a in ['cubic']:
+        if a in ['cubic', 'reno']:
             continue
         return a
     return None
