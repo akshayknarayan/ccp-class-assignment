@@ -50,7 +50,7 @@ You are free to modify any of the scripts here for your experimental convenience
 Submission Instructions
 -----------------------
 
-After you optionally choose a teammate, come up with a team name, and enter that name into a file called `NAME.txt`. Enter the MIT ldaps of everyone in your team into `PARTNER.txt`, one name per line. You'll need to commit AND push both files before you can submit to the leaderboard; otherwise your entry may not appear. You must submit to the leaderboard at least once before the deadline.
+After you optionally choose a teammate, come up with a team name, and enter that name into a file called `NAME.txt`. Enter the MIT ldaps of everyone in your team into `PARTNER.txt`, one name per line. You must submit to the leaderboard at least once before the deadline.
 
 In the `your_code` directory, commit a file `README.md` that includes a 1-2 paragraph writeup of your approach, why you chose it, and what you tried. This is only required for your final submission, not for leaderboard submissions.
 
