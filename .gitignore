@@ -5,3 +5,4 @@ results
 */*pycache*
 *.pyc
 *.rustfmt
+your_code/target

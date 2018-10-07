@@ -5,5 +5,7 @@ authors = ["TODO"]
 edition = "2018"
 
 [dependencies]
+clap = "2.29"
 generic_cong_avoid = { path = "../generic-cong-avoid" }
+portus = "0.3.3"
 slog = {version = "2"}

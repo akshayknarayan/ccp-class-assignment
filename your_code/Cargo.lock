@@ -375,7 +375,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "your_code"
 version = "0.0.1"
 dependencies = [
+ "clap 2.32.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "generic_cong_avoid 0.1.0",
+ "portus 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "slog 2.4.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
