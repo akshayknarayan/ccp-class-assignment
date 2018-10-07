@@ -71,6 +71,8 @@ def run_alg_experiment(algname, alg_binary, alg_args, bw, rtt, dur, k, buf, outd
     algname = algname.replace('-', '') # remove dashes to keep the logfile names parseable
     kill_processes(alg_binary.split('/')[-1])
 
+    sh.run(shut_up("mkdir -p {}".format(outdir)), shell=True)
+
     for it in range(num_iters):
         prefix = "{}-{}mbps-{}ms-{}s-{}flows-{}pkts-{}".format(algname, bw, rtt,
                 dur, k, buf, it)
@@ -87,6 +89,7 @@ def run_alg_experiment(algname, alg_binary, alg_args, bw, rtt, dur, k, buf, outd
 def run_algs(algs, bw, rtt, dur, k, buf, outdir, iters):
     for name in algs:
         alg = algs[name]
-        alg['args'] += " --num-connections={}".format(k)
+        if name is not 'reno' and name is not 'cubic':
+            alg['args'] += " --num-connections={}".format(k)
         run_alg_experiment(name, alg['binary'], alg['args'], bw, rtt, dur, k, buf, outdir, iters)
 
