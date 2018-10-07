@@ -44,36 +44,52 @@ def get_remote():
     else:
         return input("Git remote url: ")
 
+def parse_github(gh):
+    http_prefix = "https://github.mit.edu/"
+    ssh_prefix = "git@github.mit.edu:"
+    if not gh.endswith(".git"):
+        return None
+    gh = gh[:-4]
+    if gh.startswith(http_prefix):
+        return gh[len(http_prefix):]
+    if gh.startswith(ssh_prefix):
+        return gh[len(ssh_prefix):]
+    return None
+
 def upload():
     url = "http://6829fa18.csail.mit.edu/register"
     r = ''
+
     while True:
-        r = get_remote()
-        if 'github.mit.edu' not in r:
-            print("Must use github.mit.edu")
+        rem = get_remote()
+        acct = parse_github(rem)
+        if acct is None:
+            print("Invalid remote name: " + rem)
             continue
-        if 'https://' not in r and 'git@' not in r:
-            print("Please specify repository name in 'git remote show origin' format.")
-            continue
+        r = acct
         break
 
     name = ''
     with open('NAME.txt', 'r') as f:
         name = f.read()
-
+    
     try:
-        requests.post(url,
-            data = {
+        resp = requests.post(url,
+            json = {
                 'repository': r,
                 'team': name,
             },
             timeout=5,
         )
-    except:
-        print("Could not contact contest server.")
+        if resp.status_code != 200:
+            err = next(resp.iter_lines()).decode("utf-8")
+            print("ERROR: server response: " + err)
+            return
+    except Exception as e:
+        print("Could not contact contest server: " + str(e))
         return
 
-    print("Check your results at http://6829fa18.csail.mit.edu/{}.html".format(name))
+    print("Check your results at http://6829fa18.csail.mit.edu/teams/{}/report.html".format(name))
     print("Check the leaderboard at http://6829fa18.csail.mit.edu/leaderboard.html")
 
 s = check_required_files()
