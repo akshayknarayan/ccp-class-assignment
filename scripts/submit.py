@@ -31,7 +31,7 @@ def tag_submit():
 def git_push():
     sh.check_call("git push origin :refs/tags/submission", shell=True)
     sh.check_call("git push origin submission", shell=True)
-    
+
 def get_remote():
     remote = ''
     try:
@@ -77,7 +77,7 @@ def upload():
     name = ''
     with open('NAME.txt', 'r') as f:
         name = f.read()
-    
+
     try:
         resp = requests.post(url,
             json = {
@@ -95,8 +95,8 @@ def upload():
         return
 
     print("Your submission has been submitted to the contest server!")
-    print("Results will be available soon at http://6829fa18.csail.mit.edu/teams/{}/report.html".format(name))
-    print("Check the leaderboard at http://6829fa18.csail.mit.edu/leaderboard.html")
+    print("Results will be available soon at http://6829fa18.csail.mit.edu/teams/{}/report.html".format(name.strip()))
+    print("Check the leaderboard at http://6829fa18.csail.mit.edu")
 
 s = check_required_files()
 if not s:
@@ -108,4 +108,9 @@ if not s:
     sys.exit(1)
 
 tag_submit()
+
+s = check_continue("Make sure you have added \"akshayn\" and \"vikramn\" as repository collaborators.")
+if not s:
+    sys.exit(1)
+
 upload()
