@@ -75,6 +75,7 @@ def upload():
             continue
         r = acct
         break
+    git_push()
 
     name = ''
     with open('NAME.txt', 'r') as f:
@@ -109,5 +110,4 @@ if not s:
     sys.exit(1)
 
 tag_submit()
-git_push()
 upload()
