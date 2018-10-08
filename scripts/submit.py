@@ -94,7 +94,8 @@ def upload():
         print("Could not contact contest server: " + str(e))
         return
 
-    print("Check your results at http://6829fa18.csail.mit.edu/teams/{}/report.html".format(name))
+    print("Your submission has been submitted to the contest server!")
+    print("Results will be available soon at http://6829fa18.csail.mit.edu/teams/{}/report.html".format(name))
     print("Check the leaderboard at http://6829fa18.csail.mit.edu/leaderboard.html")
 
 s = check_required_files()
