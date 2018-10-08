@@ -28,6 +28,13 @@ def tag_submit():
     cmd = 'git tag -f submission'
     sh.run(cmd, shell=True)
 
+def git_push():
+    cmd = 'git push origin submission'
+    result = sh.run(cmd, shell=True)
+    if result.returncode != 0:
+        print 'Failed to push to remote. Perhaps you need to git pull --rebase?'
+        sys.exit(results.returncode)
+
 def get_remote():
     remote = ''
     try:
@@ -102,4 +109,5 @@ if not s:
     sys.exit(1)
 
 tag_submit()
+git_push()
 upload()
