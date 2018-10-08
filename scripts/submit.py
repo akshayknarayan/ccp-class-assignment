@@ -29,12 +29,9 @@ def tag_submit():
     sh.run(cmd, shell=True)
 
 def git_push():
-    cmd = 'git push origin submission'
-    result = sh.run(cmd, shell=True)
-    if result.returncode != 0:
-        print 'Failed to push to remote. Perhaps you need to git pull --rebase?'
-        sys.exit(results.returncode)
-
+    sh.check_call("git push origin :refs/tags/submission", shell=True)
+    sh.check_call("git push origin submission", shell=True)
+    
 def get_remote():
     remote = ''
     try:
