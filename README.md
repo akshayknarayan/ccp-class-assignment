@@ -13,7 +13,7 @@ She needs a congestion control developer to create an algorithm she can use for 
 Because her transfer is so large, Alyssa wants to give it priority in her network. Unfortunately, Alyssa has a firewall configuration which only allows her to open one connection. 
 She asks you to develop a congestion control algorithm which can compete fairly with not one, but any given number of existing flows, across a variety of Internet conditions, including variable RTT, link bandwidths, and queue sizes.
 
-Your job is to develop a congestion control algorithm using CCP (below) that takes in a single argument in the format `--num-connections=<k>` (you can use an [argument parsing library](https://clap.rs) to make this easier). Your algorithm's should emulate the behavior of k TCP Reno flows, which we test by running k Reno flows alongside your single CCP flow; your CCP flow should get half the bandwidth on average over the duration of the test.
+Your job is to develop a congestion control algorithm using CCP (below) that takes in a single argument in the format `--num-connections=<k>` (you can use an [argument parsing library](https://clap.rs) to make this easier). Your algorithms should emulate the behavior of k TCP Reno flows, which we test by running k Reno flows alongside your single CCP flow; your CCP flow should get half the bandwidth on average over the duration of the test.
 
 Setup
 -----
@@ -36,7 +36,7 @@ The contest server will choose several random link configurations each day on wh
  - k (number of connections to emulate) between 1 and 10
  - Queue buffer between 0.25 * BDP and 4 * BDP, and such that every flow can have at least 2 packets in the queue.
 
-Submissions are scored on fairness, defined as follows: if the average bandwidth occupied by the CCP flow is B, and the other Reno flows is R, the fairness metric is B / (B + R). Your goal is to get as close as possible to 0.5. Each submission will be run on several (usually 5) configurations, and your score is the run with the median distance to 0.5. Submissions will use the team name you choose, not your ldap (see Submission Instructions). Note that because of the randomized experiment conditions, your spot on the leaderboard may change from day to day!
+Submissions are scored on fairness, defined as follows: if the average bandwidth occupied by the CCP flow is B, and the other Reno flows is R, the fairness metric is B / (B + R). Your goal is to get as close as possible to 0.5. Each submission will be run on several (usually 5) configurations, and your score is the run with a fairness score farthest from 0.5. Submissions will use the team name you choose, not your ldap (see Submission Instructions). Note that because of the randomized experiment conditions, your spot on the leaderboard may change from day to day!
 
 CCP
 ---
