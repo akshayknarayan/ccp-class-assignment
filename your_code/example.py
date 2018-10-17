@@ -15,7 +15,7 @@ class Reno(portus.GenericCongAvoidBase):
         self.init_cwnd = init_cwnd
         self.cwnd = init_cwnd
         self.mss = mss
-        print "Emulating %d connections" % args.num_connections
+        sys.stdout.write("Emulating %d connections" % args.num_connections)
 
     def curr_cwnd(self):
         return self.cwnd
