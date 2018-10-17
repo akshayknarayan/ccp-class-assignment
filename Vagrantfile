@@ -15,6 +15,10 @@ su -c "./rust.install.sh -y -v --default-toolchain nightly" vagrant
 sudo apt-get -y install python3-pip
 sudo pip3 install setuptools
 sudo pip3 install setuptools_rust
+# Python bindings only work on Python2
+sudo pip install setuptools
+sudo pip install setuptools_rust
+
 # mahimahi setup
 echo "sudo sysctl -w net.ipv4.ip_forward=1" >> ~/.bashrc
 SCRIPT
