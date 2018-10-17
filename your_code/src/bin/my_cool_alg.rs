@@ -14,7 +14,8 @@ fn main() {
         .author("someone")
         .arg(clap::Arg::with_name("num-connections")
              .long("num-connections")
-             .required(true))
+             .required(true)
+             .takes_value(true))
         .get_matches();
 
     let num_conns: u32 = matches.value_of("num-connections").unwrap().parse().unwrap();
