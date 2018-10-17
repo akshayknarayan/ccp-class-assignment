@@ -33,10 +33,10 @@ The contest server will choose several random link configurations each day on wh
  - Link capacity between 1 Mbit/s and 96 Mbit/s
  - RTT between 2ms and 100ms
  - Test duration between 30s and 60s
- - k (number of connections to emulate) between 1 and 10
+ - k (number of connections to emulate) between 1 and 5
  - Queue buffer between 0.25 * BDP and 4 * BDP, and such that every flow can have at least 2 packets in the queue.
 
-Submissions are scored on fairness, defined as follows: if the average bandwidth occupied by the CCP flow is B, and the other Reno flows is R, the fairness metric is B / (B + R). Your goal is to get as close as possible to 0.5. Each submission will be run on several (usually 5) configurations, and your score is the run with a fairness score farthest from 0.5. Submissions will use the team name you choose, not your ldap (see Submission Instructions). Note that because of the randomized experiment conditions, your spot on the leaderboard may change from day to day!
+Submissions are scored on fairness, defined as follows: if the average bandwidth occupied by the CCP flow is B, and the other Reno flows is R, the fairness metric is B / (B + R). Your goal is to get as close as possible to 0.5. Each submission will be run on several (usually 5) configurations, and your score is the run with a fairness score second-farthest from 0.5 (equivalently, the 80th percentile). Submissions will use the team name you choose, not your ldap (see Submission Instructions). Note that because of the randomized experiment conditions, your spot on the leaderboard may change from day to day!
 
 CCP
 ---
