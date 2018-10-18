@@ -16,6 +16,7 @@ sudo apt-get -y install python3-pip
 sudo pip3 install setuptools
 sudo pip3 install setuptools_rust
 # Python bindings only work on Python2
+sudo apt-get install -y python-pip
 sudo pip install setuptools
 sudo pip install setuptools_rust
 
